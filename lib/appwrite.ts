@@ -1,4 +1,4 @@
-import { CreateUserParams, SignInParams } from "@/type";
+import { CreateUserParams, GetMenuParams, SignInParams } from "@/type";
 import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite";
 
 export const appwriteConfig = {
@@ -6,7 +6,13 @@ export const appwriteConfig = {
     platform: "com.atomic.chownownow",
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
     databaseId: "68dfa4500022d0beb31e",
-    userCollectionId: "user"
+    bucketId: "68e7dd76003a845cc904",
+    userCollectionId: "user",
+    categoriesCollectionId: "categories",
+    menuCollectionId: "menu",
+    customizationsCollectionId: "customization",
+    menuCustomizationsCollectionId: "menu_customizations"
+
 }
 
 export const client = new Client();
@@ -68,6 +74,7 @@ export const getCurrentUser = async () => {
         throw new Error(e as string);
     }
 }
+
 
 (async () => {
     console.log("🧠 Testing connection to:", appwriteConfig.endpoint);
