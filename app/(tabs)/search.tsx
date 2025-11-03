@@ -1,13 +1,15 @@
 import { getCategories, getMenu } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
-import { MenuItem } from "@/type";
+import { Category, MenuItem } from "@/type";
 import cn from "clsx";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
 import { FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CartButton from "../components/CartButton";
+import Filter from "../components/Filter";
 import MenuCard from "../components/MenuCard";
+import SearchBar from "../components/SearchBar";
 
 const Search = () => {
   const { category, query } = useLocalSearchParams<{
@@ -63,8 +65,8 @@ const Search = () => {
               </View>
               <CartButton />
             </View>
-            <Text> Search button</Text>
-            <Text>Filter</Text>
+            <SearchBar />
+            <Filter categories={categories! as unknown as Category[]} />
           </View>
         )}
         ListEmptyComponent={() => !loading && <Text>No results</Text>}
