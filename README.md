@@ -1,6 +1,6 @@
 # Mobile Shopping App (Expo + TypeScript)
 
-React Native (Expo) mobile shopping app built for the technical assessment.
+React Native (Expo) mobile shopping app built for the technical assessment. This project started as a food ordering app and was reworked to satisfy the shopping‑app requirements while keeping the original structure and design language.
 
 **Core features**
 
@@ -45,6 +45,19 @@ React Native (Expo) mobile shopping app built for the technical assessment.
 - **Cart state**: Context store in `store/cart.store.tsx` with AsyncStorage persistence.
 - **Orders**: Stored locally in AsyncStorage for the assessment.
 - **Products API**: `lib/restApi.ts` reads from Appwrite REST endpoints.
+
+## Assessment coverage
+
+This project meets the required shopping‑app assessment criteria:
+
+- Product listing screen with search, category filter, and price sort
+- Product detail screen
+- Add to cart + cart quantity controls
+- Checkout with validation + mock payment
+- Order confirmation + orders list
+- React Query for server state
+- Cart persistence via AsyncStorage
+- Error/loading/empty states for network calls
 
 ## Screens
 
