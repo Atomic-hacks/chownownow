@@ -64,9 +64,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="search"
         options={{
-          title: "Search",
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="orders"
+        options={{
+          title: "Orders",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon title="Search" icon={images.search} focused={focused} />
+            <TabBarIcon title="Orders" icon={images.clock} focused={focused} />
           ),
         }}
       />
@@ -77,6 +83,24 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <TabBarIcon title="Cart" icon={images.bag} focused={focused} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="checkout"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="order-confirmation"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="product/[id]"
+        options={{
+          href: null,
         }}
       />
       <Tabs.Screen

@@ -3,7 +3,11 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
 import useAuthStore from "@/store/auth.store";
+import { CartProvider } from "@/store/cart.store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const { isLoading, fetchAuthenticatedUser } = useAuthStore();
@@ -27,5 +31,11 @@ export default function RootLayout() {
 
   if (!fontsLoaded || isLoading) return null;
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+      </CartProvider>
+    </QueryClientProvider>
+  );
 }

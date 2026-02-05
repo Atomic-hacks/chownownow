@@ -11,9 +11,27 @@ export interface MenuItem extends Models.Document {
     type: string;
 }
 
+export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    description: string;
+    category: string;
+    rating?: number;
+    inStock?: boolean;
+}
+
 export interface Category extends Models.Document {
     name: string;
     description: string;
+}
+
+export interface CategoryItem {
+    id: string;
+    name: string;
+    price: number;
+    type: string;
 }
 
 export interface User extends Models.Document {
@@ -36,6 +54,25 @@ export interface CartItemType {
     image_url: string;
     quantity: number;
     customizations?: CartCustomization[];
+}
+
+export interface CartItem {
+    product: Product;
+    quantity: number;
+}
+
+export interface Order {
+    id: string;
+    items: CartItemType[];
+    total: number;
+    createdAt: string;
+    customer: {
+        name: string;
+        phone?: string;
+        email?: string;
+        address: string;
+        city: string;
+    };
 }
 
 export interface CartStore {

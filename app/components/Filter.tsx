@@ -1,19 +1,39 @@
-import { Category } from "@/type";
 import cn from "clsx";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Platform, Text, TouchableOpacity } from "react-native";
 
-export default function Filter({ categories }: { categories: Category[] }) {
+type CategoryLike = {
+  $id: string;
+  name: string;
+};
+
+type FilterProps = {
+  categories: CategoryLike[];
+  counts?: Record<string, number>;
+  totalCount?: number;
+};
+
+export default function Filter({ categories, counts, totalCount }: FilterProps) {
   const searchParams = useLocalSearchParams();
-  const [active, setActive] = useState(searchParams.category || "");
+  const categoryParam = Array.isArray(searchParams.category)
+    ? searchParams.category[0]
+    : searchParams.category;
+  const [active, setActive] = useState(categoryParam || "");
+
+  useEffect(() => {
+    const next = Array.isArray(searchParams.category)
+      ? searchParams.category[0]
+      : searchParams.category;
+    setActive(next || "");
+  }, [searchParams.category]);
   const handlePress = (id: string) => {
     setActive(id);
 
-    if(id==='all') router.setParams({ category: undefined })
-    else router.setParams({ category: id })
+    if (id === "all") router.setParams({ category: undefined });
+    else router.setParams({ category: id });
   };
-  const filterData: (Category | { $id: string; name: string })[] = categories
+  const filterData: CategoryLike[] = categories?.length
     ? [{ $id: "all", name: "All" }, ...categories]
     : [{ $id: "all", name: "All" }];
 
@@ -24,32 +44,37 @@ export default function Filter({ categories }: { categories: Category[] }) {
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerClassName="gap-x-2 pb-2"
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          className={cn(
-            "filter",
-            active === item.$id ? "bg-amber-500" : "bg-white"
-          )}
-          style={
-            Platform.OS === "android"
-              ? {
-                  elevation: 5,
-                  shadowColor: "#878787",
-                }
-              : {}
-          }
-          onPress={() => handlePress(item.$id)}
-        >
-          <Text
+      renderItem={({ item }) => {
+        const count =
+          item.$id === "all" ? totalCount : counts?.[item.$id] ?? undefined;
+        return (
+          <TouchableOpacity
             className={cn(
-              "body-medium",
-              active === item.$id ? "text-white" : "text-gray-200"
+              "filter",
+              active === item.$id ? "bg-amber-500" : "bg-white",
             )}
+            style={
+              Platform.OS === "android"
+                ? {
+                    elevation: 5,
+                    shadowColor: "#878787",
+                  }
+                : {}
+            }
+            onPress={() => handlePress(item.$id)}
           >
-            {item.name}
-          </Text>
-        </TouchableOpacity>
-      )}
+            <Text
+              className={cn(
+                "body-medium",
+                active === item.$id ? "text-white" : "text-gray-200",
+              )}
+            >
+              {item.name}
+              {typeof count === "number" ? ` (${count})` : ""}
+            </Text>
+          </TouchableOpacity>
+        );
+      }}
     />
   );
 }

@@ -1,17 +1,21 @@
 import { images } from "@/constants";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, TextInput, TouchableOpacity, View } from "react-native";
 import { useDebouncedCallback } from "use-debounce";
 
 export default function SearchBar() {
   const params = useLocalSearchParams<{ query: string }>();
-  const [query, setQuery] = useState(params.query);
+  const initialQuery = typeof params.query === "string" ? params.query : "";
+  const [query, setQuery] = useState(initialQuery);
 
-  const debouncedSearch = useDebouncedCallback(
-    (text: string) => router.push(`/search?query=${text}`),
-    500
-  );
+  useEffect(() => {
+    if (initialQuery !== query) setQuery(initialQuery);
+  }, [initialQuery]);
+
+  const debouncedSearch = useDebouncedCallback((text: string) => {
+    router.setParams({ query: text || undefined });
+  }, 500);
 
   const handleSearch = (text: string) => {
     setQuery(text);
@@ -30,7 +34,7 @@ export default function SearchBar() {
       />
       <TouchableOpacity
         className="pr-5 "
-        onPress={() => router.setParams({ query })}
+        onPress={() => router.setParams({ query: query || undefined })}
       >
         <Image
           source={images.search}

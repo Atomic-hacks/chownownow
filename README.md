@@ -1,8 +1,22 @@
-# Welcome to your Expo app 👋
+# Mobile Shopping App (Expo + TypeScript)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+React Native (Expo) mobile shopping app built for the technical assessment.
 
-## Get started
+**Core features**
+
+- Product listing with search, category filter, and price sort.
+- Product detail with add-to-cart.
+- Cart with quantity controls and totals.
+- Checkout with form validation and mock payment.
+- Orders list and order confirmation.
+- Persistent cart and orders via AsyncStorage.
+
+**Navigation**
+
+- Tabs: Home / Cart / Orders / Profile
+- Stack flow: Product List → Product Detail → Checkout → Order Confirmation
+
+## Setup
 
 1. Install dependencies
 
@@ -10,41 +24,43 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Configure env
+
+   Create a `.env` file (or use your local env) with:
 
    ```bash
-   npx expo start
+   EXPO_PUBLIC_APPWRITE_ENDPOINT=YOUR_APPWRITE_ENDPOINT
+   EXPO_PUBLIC_APPWRITE_PROJECT_ID=YOUR_APPWRITE_PROJECT_ID
    ```
 
-In the output, you'll find options to open the app in a
+3. Start the app
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   npm run start
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Architecture decisions
 
-## Get a fresh project
+- **Server state**: React Query (`@tanstack/react-query`) with cached product data and retries.
+- **Cart state**: Context store in `store/cart.store.tsx` with AsyncStorage persistence.
+- **Orders**: Stored locally in AsyncStorage for the assessment.
+- **Products API**: `lib/restApi.ts` reads from Appwrite REST endpoints.
 
-When you're ready, run:
+## Screens
 
-```bash
-npm run reset-project
-```
+- Home: `app/(tabs)/index.tsx`
+- Product detail: `app/(tabs)/product/[id].tsx`
+- Cart: `app/(tabs)/cart.tsx`
+- Checkout: `app/(tabs)/checkout.tsx`
+- Order confirmation: `app/(tabs)/order-confirmation.tsx`
+- Orders: `app/(tabs)/orders.tsx`
+- Profile: `app/(tabs)/profile.tsx`
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Screenshots (placeholders)
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `./screenshots/home.png`
+- `./screenshots/product.png`
+- `./screenshots/cart.png`
+- `./screenshots/checkout.png`
+- `./screenshots/orders.png`
+- `./screenshots/profile.png`
