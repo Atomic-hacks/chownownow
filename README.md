@@ -69,7 +69,7 @@ This project meets the required shopping‑app assessment criteria:
 - Orders: `app/(tabs)/orders.tsx`
 - Profile: `app/(tabs)/profile.tsx`
 
-## Screenshots (placeholders)
+## Screenshots
 
 ### Home
 
