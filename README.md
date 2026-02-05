@@ -71,9 +71,26 @@ This project meets the required shopping‑app assessment criteria:
 
 ## Screenshots (placeholders)
 
-- `./screenshots/home.png`
-- `./screenshots/product.png`
-- `./screenshots/cart.png`
-- `./screenshots/checkout.png`
-- `./screenshots/orders.png`
-- `./screenshots/profile.png`
+### Home
+
+![Home](screenshots/home.jpg)
+
+### Products
+
+![Products](screenshots/products.jpg)
+
+### Cart
+
+![Cart](screenshots/cart.jpg)
+
+### Checkout
+
+![Checkout](screenshots/checkout.jpg)
+
+### Orders
+
+![Orders](screenshots/orders.jpg)
+
+### Profile
+
+![Profile](screenshots/profile.jpg)
