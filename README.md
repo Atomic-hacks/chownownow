@@ -36,7 +36,7 @@ React Native (Expo) mobile shopping app built for the technical assessment. This
 3. Start the app
 
    ```bash
-   npm run start
+   npx expo start
    ```
 
 ## Architecture decisions
